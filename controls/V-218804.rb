@@ -64,7 +64,7 @@ drop-down list.
   tag cci: ['V-100143', 'SV-109247', 'CCI-001664']
   tag nist: ['SC-23 (3)']
 
-  cookie_setting = command('Get-WebConfigurationProperty -Filter system.web/sessionState -name * | select -expand cookieless').stdout.strip
+  cookie_setting = command('Get-WebConfigurationProperty -Filter system.web/sessionState -name cookieless').stdout.strip
 
   describe 'The website session state cookie settings' do
     subject { cookie_setting }
