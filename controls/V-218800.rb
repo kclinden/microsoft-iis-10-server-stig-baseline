@@ -42,5 +42,70 @@ the DoD PKI or an approved ECA, this is a finding.
   tag fix_id: 'F-20270r310876_fix'
   tag cci: ['V-100135', 'SV-109239', 'CCI-000185']
   tag nist: ['IA-5 (2) (a)']
+
+  CertList_Expired = command('Import-Module -Name WebAdministration;
+    Get-ChildItem IIS:SSLBindings `
+    | select -expand store `
+    | ForEach-Object -Process `
+    {
+      $DaysToExpiration = 0
+      $expirationDate = (Get-Date).AddDays($DaysToExpiration)
+      $cert = Get-ChildItem CERT:LocalMachine/$_
+      if (($cert.EnhancedKeyUsageList | select -expand FriendlyName) -eq "Server Authentication") {
+        if ($cert.Subject -match "=") {$subject = $cert.Subject.split("=")[1]} else {$subject = $cert.Subject}
+        if ($cert.NotAfter -lt $expirationDate) { Write-Output  "$subject  EXPIRED"}
+      }
+    }').stdout.strip.split("\r\n")
+  
+    CertList_Issuer = command('Import-Module -Name WebAdministration;
+    Get-ChildItem IIS:SSLBindings `
+    | select -expand store `
+    | ForEach-Object -Process `
+    {
+      $DaysToExpiration = 0
+      $expirationDate = (Get-Date).AddDays($DaysToExpiration)
+      $cert = Get-ChildItem CERT:LocalMachine/$_
+      if (($cert.EnhancedKeyUsageList | select -expand FriendlyName) -eq "Server Authentication") {
+        $expirationDate = $cert.NotAfter
+        if ($cert.Subject -match "=") {$subject = $cert.Subject.split("=")[1]} else {$subject = $cert.Subject}
+        if ($cert.Issuer -match "C=") {$issuer = $cert.Issuer -match  ".*\s+C=(\S+)"; $issuer = $matches[1]} else {$issuer = "unknown"}
+         Write-Output  "$subject issued by $issuer will expire on  $expirationDate "
+      }
+    }').stdout.strip.split("\r\n")
+  
+    CertList_NotExpired_Issuer = command('Import-Module -Name WebAdministration;
+  Get-ChildItem IIS:SSLBindings `
+  | select -expand store `
+  | ForEach-Object -Process `
+  {
+    $DaysToExpiration = 0
+    $expirationDate = (Get-Date).AddDays($DaysToExpiration)
+    $cert = Get-ChildItem CERT:LocalMachine/$_
+    if (($cert.EnhancedKeyUsageList | select -expand FriendlyName) -eq "Server Authentication") {
+      $expirationDate = $cert.NotAfter
+      if ($cert.Subject -match "=") {$subject = $cert.Subject.split("=")[1]} else {$subject = $cert.Subject}
+      if ($cert.Issuer -match "C=") {$issuer = $cert.Issuer -match  ".*\s+C=(\S+)"; $issuer = $matches[1]} else {$issuer = "unknown"}
+       Write-Output  "$subject issued by $issuer will expire on  $expirationDate "
+    }
+  }').stdout.strip.split("\r\n")
+  
+    CertList_Expired.each do |cert|
+      describe cert do
+        it { should_not match /\S+\s+EXPIRED/ }
+      end
+    end
+  
+    CertList_NotExpired_Issuer.each do |cert|
+      describe cert do
+        it { should match /US/ }
+      end
+    end
+  
+    if CertList_NotExpired_Issuer.empty?
+      describe 'Number of Certificates used by IIS   ' do
+        skip 'Could not find any SSL Certificates used by IIS on this system '
+      end
+    end
+
 end
 
