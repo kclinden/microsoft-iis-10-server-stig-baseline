@@ -60,5 +60,13 @@ specific system IPs, this is Not Applicable.
   tag fix_id: 'F-20275r310891_fix'
   tag cci: ['SV-109249', 'V-100145', 'CCI-001664']
   tag nist: ['SC-23 (3)']
+
+  cookie_setting = json(command:'(Get-WebConfigurationProperty -Filter system.web/sessionState -name timeout).value | ConvertTo-JSON').params
+
+  describe 'The website session state cookie timeout should be 20 minutes or less' do
+    subject { cookie_setting }
+    its(['TotalMinutes']) { should <= 20 }
+  end
+
 end
 
