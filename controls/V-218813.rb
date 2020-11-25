@@ -78,5 +78,12 @@ the IIS Manager.
   tag fix_id: 'F-20283r310915_fix'
   tag cci: ['SV-109265', 'V-100161', 'CCI-002322']
   tag nist: ['AC-17 (9)']
+
+  describe "Manual validation required. Review IIS Webserver for capability to immediately
+  disconnect or disable remote access to the hosted applications" do
+    skip "Manual validation required. Review IIS Webserver for capability to immediately
+  disconnect or disable remote access to the hosted applications"
+  end
+
 end
 
