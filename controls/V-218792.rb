@@ -49,5 +49,10 @@ user management outside the IIS 10.0 web server.
   tag fix_id: 'F-20262r310852_fix'
   tag cci: ['SV-109223', 'V-100119', 'CCI-000381']
   tag nist: ['CM-7 a']
+
+  describe 'Manual review of web server is required.' do
+    skip 'Manual review of web server is required'
+  end
+
 end
 
