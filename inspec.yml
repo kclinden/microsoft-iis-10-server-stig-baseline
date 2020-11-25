@@ -19,3 +19,7 @@ inputs:
     description: 'Minimum number of users required for server to operate'
     type: array
     value: ['Administrator', 'Guest']
+  - name: log_directory
+    description: 'IIS site log directory'
+    type: string
+    value: '%SystemDrive%\inetpub\logs\LogFiles'

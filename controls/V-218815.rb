@@ -66,5 +66,24 @@ setting.
   tag fix_id: 'F-20285r310921_fix'
   tag cci: ['SV-109269', 'V-100165', 'CCI-001849']
   tag nist: ['AU-4']
+
+  log_directory = input('log_directory')
+  get_log_directory = command('Get-WebConfigurationProperty -pspath "MACHINE/WEBROOT/APPHOST" -filter "system.ApplicationHost/log" -Name centralW3CLogFile | select -expandProperty directory').stdout.strip
+  log_period = command('Get-WebConfigurationProperty -pspath "MACHINE/WEBROOT/APPHOST" -filter "system.ApplicationHost/log" -Name centralW3CLogFile | select -expandProperty period').stdout.strip
+
+  describe 'The IIS log directory' do
+    subject { get_log_directory }
+    it { should cmp log_directory.to_s }
+  end
+
+  describe "Manually verify the 'Do not create new log files' is not selected on the IIS web server" do
+    skip "Manually verify the 'Do not create new log files' is not selected on the IIS web server"
+  end
+
+  describe 'The websites log file rollover period' do
+    subject { log_period }
+    it { should cmp 'Daily' }
+  end
+
 end
 
