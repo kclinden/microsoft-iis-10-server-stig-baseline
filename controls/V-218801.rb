@@ -39,5 +39,13 @@ extensions."
   tag fix_id: 'F-20271r310879_fix'
   tag cci: ['V-100137', 'SV-109241', 'CCI-001166']
   tag nist: ['SC-18 (1)']
+
+  java_software = command('Get-Childitem –Path C:\ -Include *.java,*.jpp -File -Recurse -ErrorAction SilentlyContinue').stdout.strip
+
+  describe 'The java software installed on the IIS webserver' do
+    subject { java_software }
+    it { should cmp '' }
+  end
+
 end
 
