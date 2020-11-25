@@ -1,4 +1,4 @@
-cd# encoding: UTF-8
+# encoding: UTF-8
 
 control 'V-218795' do
   title "All IIS 10.0 web server sample code, example applications, and
