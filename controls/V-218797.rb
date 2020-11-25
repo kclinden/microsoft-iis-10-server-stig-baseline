@@ -42,5 +42,10 @@ modules installed that are not necessary for web server operation."
   tag fix_id: 'F-20267r310867_fix'
   tag cci: ['V-100129', 'SV-109233', 'CCI-000381']
   tag nist: ['CM-7 a']
+
+  describe 'This test currently has no automated tests, you must check manually' do
+    skip 'This check must be preformed manually'
+  end
+
 end
 
