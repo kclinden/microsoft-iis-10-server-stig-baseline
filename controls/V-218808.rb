@@ -39,5 +39,13 @@ disclosing sensitive content is increased."
   tag fix_id: 'F-20278r310900_fix'
   tag cci: ['V-100151', 'SV-109255', 'CCI-001310']
   tag nist: ['SI-10']
+
+  directory_browsing = command('Get-WebConfigurationProperty -Filter system.webServer/directoryBrowse -name * | select -expand enabled').stdout.strip
+
+  describe 'The websites enable directory browsing' do
+    subject { directory_browsing }
+    it { should cmp 'False' }
+  end
+
 end
 
