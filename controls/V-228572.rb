@@ -39,5 +39,10 @@ from the same network as the relay, and implement TLS."
   tag fix_id: 'F-30783r505289_fix'
   tag cci: ['SV-111857', 'V-102895', 'CCI-000381']
   tag nist: ['CM-7 a']
+
+  describe 'This test currently has no automated tests, you must check manually' do
+    skip 'This check must be preformed manually'
+  end
+
 end
 
