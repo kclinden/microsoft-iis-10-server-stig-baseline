@@ -40,5 +40,10 @@ server in the event of the necessity for rollback.
   tag fix_id: 'F-20276r310894_fix'
   tag cci: ['SV-109251', 'V-100147', 'CCI-001190']
   tag nist: ['SC-24']
+
+  describe 'Manual review of DR portion of BCDR is required.' do
+    skip 'Manual review of DR portion of BCDR is required.'
+  end
+
 end
 
