@@ -1,4 +1,4 @@
-# encoding: UTF-8
+cd# encoding: UTF-8
 
 control 'V-218795' do
   title "All IIS 10.0 web server sample code, example applications, and
@@ -31,5 +31,10 @@ tutorials which are not explicitly used by a production website."
   tag fix_id: 'F-20265r310861_fix'
   tag cci: ['V-100125', 'SV-109229', 'CCI-000381']
   tag nist: ['CM-7 a']
+
+  describe 'Manual review of web server is required.' do
+    skip 'Manual review of web server is required'
+  end
+
 end
 
