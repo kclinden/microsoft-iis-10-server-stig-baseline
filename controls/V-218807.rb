@@ -48,5 +48,32 @@ finding.
   tag fix_id: 'F-20277r310897_fix'
   tag cci: ['V-100149', 'SV-109253', 'CCI-001199']
   tag nist: ['SC-28']
+
+  encryption_method = command('Get-WebConfigurationProperty -Filter system.web/machineKey -name * | select -expand decryption').stdout.strip
+
+  validation_method = command('Get-WebConfigurationProperty -Filter system.web/machineKey -name * | select -expand validation').stdout.strip
+
+  describe 'The IIS web server encryption method' do
+    subject { encryption_method }
+    it { should cmp 'Auto' }
+  end
+
+  describe.one do
+    describe 'The IIS web server machine key validation method' do
+      subject { validation_method }
+      it { should cmp 'HMACSHA256' }
+    end
+
+    describe 'The IIS web server machine key validation method' do
+      subject { validation_method }
+      it { should cmp 'HMACSHA384' }
+    end
+
+    describe 'The IIS web server machine key validation method' do
+      subject { validation_method }
+      it { should cmp 'HMACSHA512' }
+    end
+  end
+
 end
 
