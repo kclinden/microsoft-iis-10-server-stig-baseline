@@ -11,4 +11,4 @@ inputs:
   - name: log_fileds
     description: 'List of fields to be included in Web Server Logging Configuration'
     type: array
-    default: ['Date', 'Time', 'ClientIP', 'UserName', 'Method', 'UriQuery', 'HttpStatus', 'Referer']
+    value: ['Date', 'Time', 'ClientIP', 'UserName', 'Method', 'UriQuery', 'HttpStatus', 'Referer']
