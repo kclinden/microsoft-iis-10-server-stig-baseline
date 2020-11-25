@@ -64,5 +64,24 @@ manager and the web manager’s designees."
   tag fix_id: 'F-20286r310924_fix'
   tag cci: ['V-100167', 'SV-109271', 'CCI-001813', 'CCI-002385', 'CCI-000213']
   tag nist: ['CM-5 (1)', 'SC-5', 'AC-3']
+
+  authorized_users = input('authorized_users')
+
+  describe file('C:\windows\system32\inetsrv\InetMgr.exe') do
+    # Full control for administrators
+    it { should be_allowed('full-control', by_user: 'BUILTIN\Administrators') }
+
+    # read & execute for ALL APPLICATION PACKAGES, SYSTEM, Users
+
+    it { should be_allowed('read', by_user: 'APPLICATION PACKAGE AUTHORITY\\ALL APPLICATION PACKAGES') }
+    it { should be_allowed('read', by_user: 'NT AUTHORITY\\SYSTEM') }
+    it { should be_allowed('read', by_user: 'BUILTIN\\Users') }
+
+    # users with read & execute permissions
+    authorized_users.each do |user|
+      it { should be_allowed('read', by_user: user.to_s) }
+    end
+  end
+
 end
 

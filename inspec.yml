@@ -23,3 +23,7 @@ inputs:
     description: 'IIS site log directory'
     type: string
     value: '%SystemDrive%\inetpub\logs\LogFiles'
+  - name: authorized_users
+    description: 'A list of authorized users'
+    type: array
+    value: ['']
