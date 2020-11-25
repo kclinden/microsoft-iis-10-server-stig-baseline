@@ -60,5 +60,10 @@ and access control or flow control rules invoked.
   tag fix_id: 'F-20259r505277_fix'
   tag cci: ['V-100113', 'SV-109217', 'CCI-001487']
   tag nist: ['AU-3']
+
+  describe 'Manual review of web server is required.' do
+    skip 'Manual review of web server is required'
+  end
+
 end
 
