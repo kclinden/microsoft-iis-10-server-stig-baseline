@@ -51,5 +51,10 @@ functions must be mission essential and documented.
   tag fix_id: 'F-20272r310882_fix'
   tag cci: ['SV-109243', 'V-100139', 'CCI-001082']
   tag nist: ['SC-2']
+
+  describe 'This test currently has no automated tests, you must check manually' do
+    skip 'This check must be preformed manually'
+  end
+
 end
 
