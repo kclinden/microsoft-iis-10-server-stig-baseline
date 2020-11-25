@@ -54,5 +54,11 @@ secure path."
   tag fix_id: 'F-20281r505280_fix'
   tag cci: ['V-100157', 'SV-109261', 'CCI-002314']
   tag nist: ['AC-17 (1)']
+
+  #This should check for winrm and rdp encrpytion protocols maybe?
+  describe 'This test currently has no automated tests, you must check manually' do
+    skip 'This check must be preformed manually'
+  end
+
 end
 
