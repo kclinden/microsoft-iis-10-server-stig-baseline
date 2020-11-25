@@ -18,4 +18,4 @@ inputs:
   - name: minimal_local_users
     description: 'Minimum number of users required for server to operate'
     type: array
-    default: ['Administrator', 'Guest']
+    value: ['Administrator', 'Guest']
