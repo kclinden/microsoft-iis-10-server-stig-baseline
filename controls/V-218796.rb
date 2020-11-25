@@ -49,5 +49,20 @@ uninstalled or are not used.
   tag fix_id: 'F-20266r310864_fix'
   tag cci: ['SV-109231', 'V-100127', 'CCI-000381']
   tag nist: ['CM-7 a']
+
+  min_local_users = input('minimal_local_users')
+  local_users = command('Get-WmiObject -Class Win32_UserAccount -Filter  "LocalAccount=\'True\'" | select -ExpandProperty Name').stdout.strip.split("\r\n")
+  is_min_users = local_users.length != min_local_users.length
+
+  describe 'The number of local users' do
+    subject { local_users }
+    its('length') { should eq min_local_users.length }
+  end
+
+  describe 'List of Local Users on the system' do
+    subject { local_users }
+    it { should cmp min_local_users }
+  end
+
 end
 

@@ -15,3 +15,7 @@ inputs:
   - name: is_proxy
     description: 'Set to true if this system is running as a proxy server'
     value: false
+  - name: minimal_local_users
+    description: 'Minimum number of users required for server to operate'
+    type: array
+    default: ['Administrator', 'Guest']
