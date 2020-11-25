@@ -38,5 +38,10 @@ IIS 10.0 web server."
   tag fix_id: 'F-20263r310855_fix'
   tag cci: ['SV-109225', 'V-100121', 'CCI-000381']
   tag nist: ['CM-7 a']
+
+  describe 'Manual review of web server is required.' do
+    skip 'Manual review of web server is required'
+  end
+
 end
 
