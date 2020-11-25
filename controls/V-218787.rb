@@ -65,5 +65,10 @@ transparently."
   tag fix_id: 'F-20257r310837_fix'
   tag cci: ['V-100109', 'SV-109213', 'CCI-000133']
   tag nist: ['AU-3']
+
+  describe 'Manual review of IIS Logs is required ' do
+    skip 'Ensure Client IP accurately identifies the client and not proxy server ( if used north of IIS )'
+  end
+
 end
 
