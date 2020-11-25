@@ -53,5 +53,10 @@ the WebDAV Publishing feature from the IIS 10.0 web server.
   tag fix_id: 'F-20269r310873_fix'
   tag cci: ['SV-109237', 'V-100133', 'CCI-000381']
   tag nist: ['CM-7 a']
+
+  describe windows_feature('Web-DAV-Publishing') do
+    it { should_not be_installed }
+  end
+
 end
 
