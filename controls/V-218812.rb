@@ -62,5 +62,10 @@ zones, this is a finding.
   tag fix_id: 'F-20282r310912_fix'
   tag cci: ['SV-109263', 'V-100159', 'CCI-002314']
   tag nist: ['AC-17 (1)']
+
+  describe 'This test currently has no automated tests, you must check manually' do
+    skip 'This check must be preformed manually'
+  end
+
 end
 
