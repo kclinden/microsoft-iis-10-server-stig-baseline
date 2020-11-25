@@ -60,5 +60,11 @@ stored.
   tag fix_id: 'F-20260r539450_fix'
   tag cci: ['SV-109219', 'V-100115', 'CCI-000164']
   tag nist: ['AU-9']
+
+  #This should be automated in the future...
+  describe 'Manual review of web server is required.' do
+    skip 'Manual review of web server is required'
+  end
+
 end
 
