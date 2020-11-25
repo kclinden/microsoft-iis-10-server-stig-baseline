@@ -31,5 +31,24 @@ according to NIST SP 800-52 and to disable all non-approved versions."
   tag fix_id: 'F-20292r310942_fix'
   tag cci: ['V-100179', 'SV-109283', 'CCI-002418']
   tag nist: ['SC-8']
+
+  tls1_1Enabled = registry_key('HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Client').Enabled
+  tls1_2Enabled = registry_key('HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Client').Enabled
+
+  describe.one do
+    describe 'The web server must maintain the confidentiality of controlled information during transmission through the use of an approved TLS version such as TLS 1.1. (currently: ' + (tls1_1Enabled ? 'TLS 1.1 enabled' : 'Other enabled') + " )\n" do
+      subject { tls1_1Enabled }
+      it 'TLS 1.1 should be enabled' do
+        expect(subject).to cmp('1')
+      end
+    end
+    describe 'The web server must maintain the confidentiality of controlled information during transmission through the use of an approved TLS version such as TLS 1.2. (currently: ' + (tls1_2Enabled ? 'TLS 1.2 enabled' : 'Other enabled') + " )\n" do
+      subject { tls1_2Enabled }
+      it 'TLS 1.2 should be enabled' do
+        expect(subject).to cmp('1')
+      end
+    end
+  end
+
 end
 
