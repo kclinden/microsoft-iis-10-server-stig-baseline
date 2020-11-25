@@ -56,6 +56,7 @@ from the \"Enable proxy\" check box.
   tag cci: ['SV-109227', 'V-100123', 'CCI-000381']
   tag nist: ['CM-7 a']
 
+  is_proxy_server = input('is_proxy')
   proxy_checkbox = command('Get-WebConfigurationProperty -pspath "MACHINE/WEBROOT/APPHOST" -filter "system.webServer/proxy" -name "enabled" | select -ExpandProperty Value').stdout.strip
   proxy_enabled = proxy_checkbox == 'False' || proxy_checkbox == '' ? false : true
 
