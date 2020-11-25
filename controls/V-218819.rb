@@ -62,5 +62,12 @@ applications.
   tag fix_id: 'F-20289r310933_fix'
   tag cci: ['SV-109277', 'V-100173', 'CCI-002385']
   tag nist: ['SC-5']
+
+  describe registry_key('HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\HTTP\Parameters') do
+    its('URIEnableCache') { should_not eq nil }
+    its('UriMaxUriBytes') { should_not eq nil }
+    its('UriScavengerPeriod') { should_not eq nil }
+  end
+
 end
 
