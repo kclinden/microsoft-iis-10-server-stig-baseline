@@ -51,7 +51,7 @@ icon.
   tag cci: ['V-100175', 'SV-109279', 'CCI-002418']
   tag nist: ['SC-8']
 
-  describe 'IIS 8.5 web server session IDs must be sent to the client using TLS, this is performed by going to ' do
+  describe 'IIS 10 web server session IDs must be sent to the client using TLS, this is performed by going to ' do
     subject { command('Get-WebConfigurationProperty -pspath "MACHINE/WEBROOT/APPHOST" -filter "system.webServer/asp/session" -Name keepSessionIdSecure | select -expandProperty value').stdout.strip }
     it 'The keepSessionIdSecure attribute should be set to True' do
       expect(subject).to cmp('true')
