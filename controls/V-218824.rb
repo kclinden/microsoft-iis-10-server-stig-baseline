@@ -46,5 +46,29 @@ unspecified ISAPI modules\" check boxes.
   tag fix_id: 'F-20294r310948_fix'
   tag cci: ['V-100183', 'SV-109287', 'CCI-000366']
   tag nist: ['CM-6 b']
+
+  isInstalledIsapiCGI = !command('Get-WindowsFeature Web-ISAPI-Ext | Where Installed').stdout.strip.nil?
+  notListedCgisAllowed = command('Get-WebConfigurationProperty -pspath "MACHINE/WEBROOT/APPHOST" -filter "system.webServer/security/isapiCgiRestriction" -Name notListedCgisAllowed | select -expandProperty value').stdout.strip == 'False'
+  notListedIsapisAllowed = command('Get-WebConfigurationProperty -pspath "MACHINE/WEBROOT/APPHOST" -filter "system.webServer/security/isapiCgiRestriction" -Name notListedIsapisAllowed | select -expandProperty value').stdout.strip == 'False'
+
+  describe 'The ISAPI and CGI restrictions feature must be installed. (currently: ' + (isInstalledIsapiCGI ? 'installed' : 'uninstalled') + " )\n" do
+    subject { windows_feature('Web-ISAPI-Ext') }
+    it 'The ISAPI and CGI restrictions should be installed' do
+      expect(subject).to be_installed
+    end
+  end
+  describe 'The ISAPI and CGI restrictions for notListedCgisAllowed must not be enabled. (currently: ' + (notListedCgisAllowed ? 'disabled' : 'enabled') + " )\n" do
+    subject { command('Get-WebConfigurationProperty -pspath "MACHINE/WEBROOT/APPHOST" -filter "system.webServer/security/isapiCgiRestriction" -Name notListedCgisAllowed | select -expandProperty value').stdout.strip }
+    it 'The ISAPI and CGI restrictions attribute notListedCgisAllowed should not be checked' do
+      expect(subject).to cmp('False')
+    end
+  end
+  describe 'The ISAPI and CGI restrictions for notListedIsapisAllowed must not be enabled. (currently: ' + (notListedIsapisAllowed ? 'disabled' : 'enabled') + " )\n" do
+    subject { command('Get-WebConfigurationProperty -pspath "MACHINE/WEBROOT/APPHOST" -filter "system.webServer/security/isapiCgiRestriction" -Name notListedIsapisAllowed | select -expandProperty value').stdout.strip }
+    it 'The ISAPI and CGI restrictions attribute notListedIsapisAllowed should not be checked' do
+      expect(subject).to cmp('False')
+    end
+  end
+
 end
 
