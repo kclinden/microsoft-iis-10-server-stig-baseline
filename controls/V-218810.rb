@@ -44,5 +44,13 @@ pages for remote requests”.
   tag fix_id: 'F-20280r310906_fix'
   tag cci: ['V-100155', 'SV-109259', 'CCI-001312']
   tag nist: ['SI-11 a']
+
+  errorMode = command('Get-WebConfigurationProperty -filter "system.webServer/httpErrors" -Name errorMode').stdout.strip
+
+  describe 'The websites error mode' do
+    subject { errorMode }
+    it { should cmp 'DetailedLocalOnly' }
+  end
+
 end
 
