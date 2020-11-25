@@ -45,5 +45,10 @@ IIS 10.0 web server and website log files."
   tag fix_id: 'F-20261r310849_fix'
   tag cci: ['V-100117', 'SV-109221', 'CCI-001348']
   tag nist: ['AU-9 (2)']
+
+  describe 'Manual review of web server is required.' do
+    skip 'Manual review of web server is required'
+  end
+
 end
 
