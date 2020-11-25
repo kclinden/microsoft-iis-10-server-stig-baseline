@@ -43,5 +43,10 @@ the application's management via a uniquely assigned IP address."
   tag fix_id: 'F-20273r310885_fix'
   tag cci: ['V-100141', 'SV-109245', 'CCI-001082']
   tag nist: ['SC-2']
+
+  describe 'Manual review of hosted applications and management procedure is required' do
+    skip 'Manual review of hosted applications and management procedure is required'
+  end
+
 end
 
