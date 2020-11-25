@@ -41,5 +41,20 @@ directories are being indexed.
   tag fix_id: 'F-20279r310903_fix'
   tag cci: ['SV-109257', 'V-100153', 'CCI-001312']
   tag nist: ['SI-11 a']
+
+  if registry_key('HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\ContentIndex\Catalogs').exists
+    describe "This control requires manual review to determine if directories other than web document
+    directories are being indexed" do
+      skip "This control requires manual review to determine if directories other than web document
+      directories are being indexed"
+    end
+  end
+  if !registry_key('HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\ContentIndex\Catalogs').exists
+    impact 0.0
+    describe "Indexing is not enabled, control Not Applicable" do
+      skip "Indexing is not enabled, control Not Applicable"
+    end
+  end
+
 end
 
