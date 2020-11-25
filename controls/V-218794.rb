@@ -61,30 +61,11 @@ from the \"Enable proxy\" check box.
   proxy_enabled = proxy_checkbox == 'False' || proxy_checkbox == '' ? false : true
 
   if is_proxy_server
-    describe windows_feature('Web-Server') do
-      it { should be_installed }
-    end
-    describe windows_feature('Web-WebServer') do
-      it { should be_installed }
-    end
-    describe windows_feature('Web-Common-Http') do
-      it { should be_installed }
-    end
-
     describe 'Running as a proxy-server, the ARR proxy should be enabled ' do
       subject { proxy_enabled }
       it { should be true }
     end
   else
-    describe windows_feature('Web-Server') do
-      it { should be_installed }
-    end
-    describe windows_feature('Web-WebServer') do
-      it { should be_installed }
-    end
-    describe windows_feature('Web-Common-Http') do
-      it { should be_installed }
-    end
     describe 'Running as a web-server, the ARR Server Proxy should not be enabled ' do
       subject { proxy_enabled }
       it { should be false }
