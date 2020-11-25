@@ -67,5 +67,22 @@ Method, URI Query, Protocol Status, and Referrer.
   tag cci: ['V-100105', 'SV-109209', 'CCI-001462', 'CCI-001464', 'CCI-000130',
 'CCI-000131', 'CCI-000132', 'CCI-000133']
   tag nist: ['AU-14 (2)', 'AU-14 (1)', 'AU-3', 'AU-3', 'AU-3', 'AU-3']
+
+  is_file_logging_enabled_string = command('Get-WebConfiguration system.applicationHost/log/centralW3CLogFile | select -expand enabled').stdout.strip
+  is_file_logging_enabled = is_file_logging_enabled_string == 'False' || is_file_logging_enabled_string == '' ? false : true
+  fields = attribute('log_fileds')
+  logging_fields = command('Get-WebConfiguration system.applicationHost/log/centralW3CLogFile | select -expand logExtFileFlags').stdout.strip.split(',')
+
+  describe 'Is Web Server Central W3C Logging Configuration Enabled' do
+    subject { is_file_logging_enabled }
+    it { should be true }
+  end
+
+  fields.each do |myField|
+    describe myField.to_s do
+      it { should be_in logging_fields }
+    end
+  end
+  
 end
 
