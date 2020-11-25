@@ -55,5 +55,16 @@ execute
   tag fix_id: 'F-20284r310918_fix'
   tag cci: ['V-100163', 'SV-109267', 'CCI-002235']
   tag nist: ['AC-6 (10)']
+
+  # This should be modified to dynamically determine the folders
+  describe directory('C:\\inetpub') do
+    it { should be_allowed('full-control', by_user: 'NT AUTHORITY\\SYSTEM') }
+    it { should be_allowed('full-control', by_user: 'NT SERVICE\\TrustedInstaller') }
+    it { should be_allowed('full-control', by_user: 'BUILTIN\Administrators') }
+    it { should be_allowed('read', by_user: 'APPLICATION PACKAGE AUTHORITY\\ALL APPLICATION PACKAGES') }
+    it { should be_allowed('read', by_user: 'BUILTIN\\Users') }
+    it { should be_allowed('read', by_user: 'CREATOR OWNER') }
+  end
+
 end
 
