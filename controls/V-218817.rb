@@ -45,5 +45,10 @@ web server."
   tag fix_id: 'F-20287r310927_fix'
   tag cci: ['SV-109273', 'V-100169', 'CCI-001762']
   tag nist: ['CM-7 (1) (b)']
+
+  describe 'This test currently has no automated tests, you must check manually' do
+    skip 'This check must be preformed manually'
+  end
+
 end
 
