@@ -57,5 +57,10 @@ secure path."
   tag fix_id: 'F-20254r310828_fix'
   tag cci: ['V-100103', 'SV-109207', 'CCI-001453']
   tag nist: ['AC-17 (2)']
+
+  describe 'Manual validation required. Review Remote Administration Procedures if Remote Administration of IIS or hosted Applications is allowed' do
+    skip 'Manual validation required. Review Remote Administration Procedures if Remote Administration of IIS or hosted Applications is allowed'
+  end
+
 end
 
