@@ -52,5 +52,13 @@ editor, locate \"system.applicationHost/sites\".
   tag fix_id: 'F-20296r310954_fix'
   tag cci: ['V-100187', 'SV-109291', 'CCI-000054']
   tag nist: ['AC-10']
+
+  maxconnections = command('Get-WebConfigurationProperty -pspath "MACHINE/WEBROOT/APPHOST" -filter "system.applicationHost/sites/siteDefaults/limits" -Name * | select -expandProperty maxconnections').stdout.strip
+
+  describe 'The IIS 10.0 websites MaxConnections setting must be configured to limit the number of allowed simultaneous session requests.' do
+    subject { maxconnections }
+    it {should_not cmp 0}
+  end
+
 end
 
