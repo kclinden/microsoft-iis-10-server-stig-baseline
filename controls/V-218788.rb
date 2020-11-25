@@ -64,5 +64,24 @@ capturing.
   tag fix_id: 'F-20258r310840_fix'
   tag cci: ['V-100111', 'SV-109215', 'CCI-000134']
   tag nist: ['AU-3']
+
+  ### One could also do get-iisSite to get the list of all configured sites and iterate ...
+
+  # Get Log Format
+  log_format = command('Get-WebConfigurationProperty -pspath "MACHINE/WEBROOT/APPHOST"  -filter "system.applicationHost/sites/siteDefaults/logFile" -name "logFormat"').stdout.strip
+  describe 'IIS Logging format' do
+    subject { log_format }
+    it { should cmp 'W3C' }
+  end
+
+  # Get Custom Vars
+  custom_field_configuration = command('Get-WebConfiguration -pspath "MACHINE/WEBROOT/APPHOST"  -filter "system.applicationHost/sites/siteDefaults/logFile/customFields/*"').stdout.strip
+  describe 'IIS Custom Fields logging configuration' do
+    subject { custom_field_configuration }
+    it { should match /sourceName\s+:\s+Connection\s+sourceType\s+:\s+RequestHeader/ }
+    it { should match /sourceName\s+:\s+Warning\s+sourceType\s+:\s+RequestHeader/ }
+    it { should match /sourceName\s+:\s+SERVER_NAME\s+sourceType\s+:\s+ServerVariable/ }
+  end
+
 end
 
