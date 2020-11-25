@@ -58,5 +58,10 @@ substituting proper domain name:
   tag fix_id: 'F-20297r505286_fix'
   tag cci: ['SV-109293', 'V-100189', 'CCI-000366']
   tag nist: ['CM-6 b']
+
+  describe 'This test currently has no automated tests, you must check manually' do
+    skip 'This check must be preformed manually'
+  end
+
 end
 
