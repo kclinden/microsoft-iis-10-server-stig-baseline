@@ -70,7 +70,7 @@ Method, URI Query, Protocol Status, and Referrer.
 
   is_file_logging_enabled_string = command('Get-WebConfiguration system.applicationHost/log/centralW3CLogFile | select -expand enabled').stdout.strip
   is_file_logging_enabled = is_file_logging_enabled_string == 'False' || is_file_logging_enabled_string == '' ? false : true
-  fields = attribute('log_fileds')
+  fields = input('log_fileds')
   logging_fields = command('Get-WebConfiguration system.applicationHost/log/centralW3CLogFile | select -expand logExtFileFlags').stdout.strip.split(',')
 
   describe 'Is Web Server Central W3C Logging Configuration Enabled' do
