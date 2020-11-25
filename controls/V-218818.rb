@@ -47,5 +47,14 @@ Manager”.
   tag fix_id: 'F-20288r310930_fix'
   tag cci: ['V-100171', 'SV-109275', 'CCI-001762']
   tag nist: ['CM-7 (1) (b)']
+
+  describe directory('%windir%\web\printers') do
+    it { should_not exist }
+  end
+
+  describe windows_feature('Print-Services') do
+    it { should_not be_installed }
+  end
+
 end
 
