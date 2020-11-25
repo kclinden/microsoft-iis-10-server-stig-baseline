@@ -54,5 +54,21 @@ radio button.
   tag fix_id: 'F-20256r310834_fix'
   tag cci: ['V-100107', 'SV-109211', 'CCI-000139', 'CCI-001464', 'CCI-001851']
   tag nist: ['AU-5 a', 'AU-14 (1)', 'AU-4 (1)']
+
+  iis_modules = command('Get-WebConfiguration  system.webServer/globalModules/*').stdout.strip
+
+  describe 'Is required IIS Module for ETW (Tracing) installed ' do
+    subject { iis_modules }
+    it { should include 'TracingModule' }
+  end
+
+  iis_logging_configuration = command('Get-WebConfigurationProperty -pspath "MACHINE/WEBROOT/APPHOST" -filter "System.Applicationhost/Sites/SiteDefaults/logfile"  -name logTargetW3C').stdout.strip.split(',')
+
+  describe 'IIS Logging configuration   ' do
+    subject { iis_logging_configuration }
+    it { should include 'File' }
+    it { should include 'ETW' }
+  end
+
 end
 
