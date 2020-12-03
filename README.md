@@ -1,8 +1,13 @@
 # microsoft-iis-10-server-stig-baseline  
 InSpec profile to validate the secure configuration of Microsoft Internet Information Services (IIS) 10.0 Server, against [DISA](https://public.cyber.mil)'s Microsoft IIS 10.0 Server Security Technical Implementation Guide (STIG) Version 2, Release 1.
 
-## Status
 This Inspec Profile is in **draft** status.
+
+## Running This Profile
+The profile can be ran be using the below command.
+```
+inspec exec https://github.com/kclinden/microsoft-iis-10-server-stig-baseline -t winrm://$server --user $user --password $pass --reporter cli
+```
 
 ## Info
 
